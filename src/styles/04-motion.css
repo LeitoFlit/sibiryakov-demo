@@ -1,0 +1,136 @@
+/* Анимации и плавные переходы.
+   Подключается последним. Для сайта-витрины отеля появление блоков при прокрутке
+   намеренно длиннее интерфейсных 100–300 мс (--motion-reveal): это редакционная
+   подача, а не реакция на действие. Окна, меню и кнопки используют 200–300 мс.
+   Анимируются только opacity и transform; исключение — плавное раскрытие FAQ.
+   При prefers-reduced-motion: reduce всё движение отключено (см. конец файла). */
+
+:root{
+  --motion-150:150ms;
+  --motion-200:200ms;
+  --motion-300:300ms;
+  --motion-reveal:900ms;
+  --motion-media:1400ms;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in:cubic-bezier(.7,0,.84,0);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+}
+
+@media (prefers-reduced-motion:no-preference){
+
+  /* ---------- Переход между страницами (Chrome, Edge, Safari 18.2+) ---------- */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:page-out var(--motion-300) var(--ease-in) both}
+  ::view-transition-new(root){animation:page-in 600ms var(--ease-out) both}
+  @keyframes page-out{to{opacity:0}}
+  @keyframes page-in{from{opacity:0;transform:translateY(12px)}}
+
+  /* ---------- Индикатор прокрутки ---------- */
+  @supports (animation-timeline:scroll()){
+    body::after{content:'';position:fixed;top:0;left:0;right:0;height:2px;z-index:40;background:#b59a72;transform-origin:0 50%;transform:scaleX(0);pointer-events:none;animation:scroll-progress linear both;animation-timeline:scroll(root)}
+    @keyframes scroll-progress{to{transform:scaleX(1)}}
+  }
+
+  /* ---------- Первый экран главной ---------- */
+  .hero-media video,.hero-media>img{animation:media-settle 2400ms var(--ease-out) both}
+  .post-hero-copy>*{animation:rise var(--motion-reveal) var(--ease-out) both}
+  .post-hero-copy>:nth-child(1){animation-delay:200ms}
+  .post-hero-copy>:nth-child(2){animation-delay:350ms}
+  .post-hero-copy>:nth-child(3){animation-delay:500ms}
+  .post-hero-copy>:nth-child(4){animation-delay:650ms}
+  .hero-pagination,.post-pause,.hero-discover{animation:fade var(--motion-reveal) var(--ease-out) 800ms both}
+  .hero-discover{animation:fade var(--motion-reveal) var(--ease-out) 800ms both,nudge 2400ms var(--ease-soft) 2000ms 3}
+
+  /* Смена сюжета: текст и фото проявляются заново */
+  .post-hero-copy.is-swapping>*{animation:rise-again 700ms var(--ease-out) both}
+  .post-hero-copy.is-swapping>:nth-child(2){animation-delay:60ms}
+  .post-hero-copy.is-swapping>:nth-child(3){animation-delay:120ms}
+  .post-hero-copy.is-swapping>:nth-child(4){animation-delay:180ms}
+  .hero-pagination button{transition:transform var(--motion-300) var(--ease-out),background-color var(--motion-300),opacity var(--motion-300)}
+
+  /* ---------- Первый экран страницы номеров ---------- */
+  .hotel-gallery>img{animation:media-settle 2400ms var(--ease-out) both}
+
+  /* ---------- Появление блоков при прокрутке ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity var(--motion-reveal) var(--ease-out),transform var(--motion-reveal) var(--ease-out);transition-delay:var(--reveal-delay,0ms)}
+  .reveal.is-in{opacity:1;transform:none}
+  /* Фото раскрываются «рамкой» от центра — без выхода за границы блока */
+  .reveal-media img{clip-path:inset(9% 7% 9% 7%);transition:clip-path var(--motion-media) var(--ease-out);transition-delay:var(--reveal-delay,0ms)}
+  .reveal-media.is-in img{clip-path:inset(0 0 0 0)}
+  .section-symbol.reveal{transform:rotate(-90deg) scale(.6)}
+  .section-symbol.reveal.is-in{transform:none}
+
+  /* Крупное фото «Прекрасно днём» мягко приближается */
+  .post-rooms{overflow:hidden}
+  .post-rooms>img{transform:scale(1.1);transition:transform 2000ms var(--ease-out)}
+  .post-rooms.is-in>img{transform:none}
+
+  /* Фото, которые меняются по кнопкам (галерея, спа, сюжеты) */
+  .media-swap,.hero-media>.media-swap,.hotel-gallery>img.media-swap{animation:media-swap 900ms var(--ease-out) both}
+  .text-swap{animation:rise 600ms var(--ease-out) both}
+
+  /* ---------- Шапка: прячется при прокрутке вниз, возвращается вверх ---------- */
+  .header{transition:transform var(--motion-300) var(--ease-out),height .3s,background .3s,color .3s}
+  .header.is-hidden{transform:translateY(-100%);transition-timing-function:var(--ease-in)}
+
+  /* ---------- Нижняя панель бронирования ---------- */
+  .stay-bar{animation:bar-in 800ms var(--ease-out) 900ms both}
+
+  /* ---------- Окна: бронирование, описание номера ---------- */
+  dialog{opacity:0;transform:translateY(24px);transition:opacity var(--motion-200) var(--ease-in),transform var(--motion-200) var(--ease-in),overlay var(--motion-200) allow-discrete,display var(--motion-200) allow-discrete}
+  dialog[open]{opacity:1;transform:none;transition-duration:500ms;transition-timing-function:var(--ease-out)}
+  @starting-style{dialog[open]{opacity:0;transform:translateY(24px)}}
+  dialog::backdrop{opacity:0;transition:opacity var(--motion-300) var(--ease-soft),overlay var(--motion-300) allow-discrete,display var(--motion-300) allow-discrete}
+  dialog[open]::backdrop{opacity:1}
+  @starting-style{dialog[open]::backdrop{opacity:0}}
+  dialog[open] .dialog-image{animation:media-swap 900ms var(--ease-out) both}
+
+  /* ---------- Полноэкранное меню ---------- */
+  .menu-dialog{transform:translateX(6%)}
+  .menu-dialog[open]{transform:none}
+  @starting-style{.menu-dialog[open]{opacity:0;transform:translateX(6%)}}
+  .menu-dialog[open] .menu-links nav a{animation:rise 700ms var(--ease-out) both}
+  .menu-dialog[open] .menu-links nav a:nth-child(1){animation-delay:120ms}
+  .menu-dialog[open] .menu-links nav a:nth-child(2){animation-delay:180ms}
+  .menu-dialog[open] .menu-links nav a:nth-child(3){animation-delay:240ms}
+  .menu-dialog[open] .menu-links nav a:nth-child(4){animation-delay:300ms}
+  .menu-dialog[open] .menu-links nav a:nth-child(5){animation-delay:360ms}
+  .menu-dialog[open] .menu-bottom,.menu-dialog[open] .menu-links>.eyebrow{animation:fade 700ms var(--ease-out) 400ms both}
+  .menu-dialog[open] .menu-photo>img{animation:media-swap 1400ms var(--ease-out) both}
+  .menu-toggle>span{transition:width var(--motion-200) var(--ease-out),transform var(--motion-200) var(--ease-out)}
+
+  /* ---------- FAQ: плавное раскрытие (Chrome 131+, в остальных — мгновенно) ---------- */
+  .faq-list summary span{transition:transform var(--motion-300) var(--ease-out)}
+  @supports (interpolate-size:allow-keywords){
+    :root{interpolate-size:allow-keywords}
+    .faq-list details::details-content{height:0;overflow:hidden;opacity:0;transition:height 450ms var(--ease-out),opacity 450ms var(--ease-out),content-visibility 450ms allow-discrete}
+    .faq-list details[open]::details-content{height:auto;opacity:1}
+  }
+
+  /* ---------- Наведение и нажатие ---------- */
+  .arrow-link span,.text-link span,.button span,.room-book,.round-arrow{transition:transform var(--motion-300) var(--ease-out)}
+  @media (hover:hover){
+    .arrow-link:hover span,.text-link:hover span,.button:hover span{transform:translateX(6px)}
+    .experience-card:hover .round-arrow{transform:translate(3px,-3px)}
+    .wellness-card img,.experience-card>img{transition:filter .3s,opacity var(--motion-300)}
+    .wellness-card:hover img,.experience-card:hover>img{opacity:.88}
+    .room-card:hover .room-image img{transform:scale(1.05)}
+    .room-image img{transition:transform 1200ms var(--ease-out)}
+  }
+  .button,.stay-bar button,.room-actions button,.arrow-link{transition:transform var(--motion-150) var(--ease-out),background .2s,box-shadow .2s,color .2s}
+  .button:active,.stay-bar button:active,.room-actions button:active{transform:scale(.97)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes rise-again{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes media-settle{from{transform:scale(1.08)}to{transform:none}}
+  @keyframes media-swap{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+  @keyframes bar-in{from{transform:translateY(100%)}to{transform:none}}
+  @keyframes nudge{0%,100%{transform:none}50%{transform:translateY(8px)}}
+}
+
+/* Уменьшение движения: всё показывается сразу и без сдвигов. */
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal-media img,.post-rooms>img{opacity:1!important;transform:none!important;clip-path:none!important}
+  .header.is-hidden{transform:none}
+}

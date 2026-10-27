@@ -15,6 +15,10 @@
     {
       "source": "src/styles/03-posthotel-theme.css",
       "output": "posthotel.css"
+    },
+    {
+      "source": "src/styles/04-motion.css",
+      "output": "motion.css"
     }
   ],
   "scripts": [
@@ -27,6 +31,7 @@
     "src/scripts/07-booking.js",
     "src/scripts/08-spa-tabs.js",
     "src/scripts/09-hero-stories.js",
-    "src/scripts/10-booking-bar.js"
+    "src/scripts/10-booking-bar.js",
+    "src/scripts/11-motion.js"
   ]
 }
