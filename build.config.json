@@ -1,7 +1,8 @@
 {
   "pages": [
     "index.html",
-    "hotel.html"
+    "hotel.html",
+    "novyi-god/index.html"
   ],
   "styles": [
     {

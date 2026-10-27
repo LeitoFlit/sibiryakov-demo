@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16304f">
+<title>Новый год в «Сибирякове»</title>
+<meta name="description" content="Демо-концепт новогодней страницы Гранд & Спа отеля «Сибиряковъ». Не официальный сайт.">
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Сцена прокрутки: снежный лист с огромным «2027», сквозь цифры видно видео отеля;
+   при прокрутке камера влетает в ноль и открывает видео целиком.
+   Ниже: бегущая строка, отсчёт, фото отеля, ориентиры цен и контакты. */
+:root{
+  color-scheme:light;
+  --snow:#f8f5ef;--beige:#ece1cf;--sand:#d9c6a5;--gold:#b8935a;--ice:#a9d1ea;--frost:#e3f0f8;
+  --ink:#16304f;--ink-soft:#4b6380;--line:rgba(22,48,79,.14);
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-flair:"Cormorant Garamond","Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gx-l:max(16px,env(safe-area-inset-left,0px));
+  --gx-r:max(16px,env(safe-area-inset-right,0px));
+  --r:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:140px}
+body{margin:0;background:var(--snow);color:var(--ink);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;line-height:.95;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--gx-l);padding-right:var(--gx-r)}
+.flair{font-family:var(--f-flair);font-style:italic;font-weight:500;letter-spacing:0;text-transform:none}
+.eyebrow{font:500 12px/1.3 var(--f-display);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+:focus-visible{outline:2.5px solid var(--ink);outline-offset:3px;border-radius:4px}
+.skip{position:fixed;top:-100px;left:16px;z-index:60;background:var(--snow);padding:12px 16px;border-radius:12px}
+.skip:focus{top:16px}
+
+/* Плашка демо-концепта и шапка */
+header.top{position:fixed;top:0;left:0;right:0;z-index:20;pointer-events:none}
+.demo-notice{pointer-events:auto;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top,0px));background:var(--ink);color:var(--snow);font:500 12px/1.4 var(--f-body);text-align:center}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.bar>*{pointer-events:auto}
+.pill{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(248,245,239,.82);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(22,48,79,.12)}
+.logo{font:800 15px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:10px 14px}
+.logo i{color:var(--gold);font-style:normal}
+nav.links{display:flex;gap:2px}
+nav.links a{text-decoration:none;font-size:14px;font-weight:600;padding:10px 14px;border-radius:999px;transition:background .2s}
+nav.links a:hover{background:var(--frost)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 24px;border-radius:999px;font:700 14px/1 var(--f-body);text-decoration:none;cursor:pointer;border:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .2s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn-ink{background:var(--ink);color:var(--snow);box-shadow:0 10px 24px rgba(22,48,79,.25)}
+.btn-ink:hover{box-shadow:0 14px 30px rgba(22,48,79,.32)}
+.btn-snow{background:var(--snow);color:var(--ink)}
+.btn-line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.icon-btn{width:46px;height:46px;border-radius:50%;border:0;background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.icon-btn:hover{background:var(--frost)}
+.icon-btn svg{width:20px;height:20px}
+.icon-btn[aria-pressed="false"]{opacity:.45}
+
+/* Сцена */
+.stage{height:230vh;position:relative}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
+.media{position:absolute;inset:0;z-index:0;background:var(--ink)}
+.media .aurora{position:absolute;inset:-20%;background:
+  radial-gradient(40% 35% at 25% 35%,var(--ice) 0%,transparent 70%),
+  radial-gradient(35% 40% at 75% 60%,var(--sand) 0%,transparent 70%),
+  radial-gradient(30% 30% at 55% 25%,#ffffff 0%,transparent 70%),
+  radial-gradient(50% 50% at 50% 90%,#2c5a86 0%,transparent 70%),var(--ink);
+  filter:blur(10px);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate3d(-4%,-2%,0) rotate(0)}100%{transform:translate3d(4%,3%,0) rotate(8deg)}}
+.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
+.media video.ready{opacity:1}
+.veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(22,48,79,.15),rgba(22,48,79,.55));opacity:var(--reveal,0)}
+#snow{position:absolute;inset:0;z-index:2;pointer-events:none;width:100%;height:100%}
+.knock{position:absolute;inset:0;z-index:3;background:var(--snow);mix-blend-mode:screen;display:grid;place-items:center;transform-origin:var(--ox,50%) 52%;will-change:transform,opacity}
+.knock span{font:900 clamp(120px,33vw,560px)/.8 var(--f-display);letter-spacing:-.06em;color:#000;transform:translateY(2%)}
+.intro{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:space-between;padding-block:132px 28px;pointer-events:none;opacity:calc(1 - var(--p,0) * 3)}
+.intro .wrap{width:100%}
+.intro-top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.intro-top h1{font-size:clamp(22px,3vw,40px);font-weight:500;max-width:16ch;line-height:1.05}
+.intro-top h1 .flair{font-size:1.25em;color:var(--gold)}
+.dates{font:500 13px/1.4 var(--f-display);letter-spacing:.14em;text-transform:uppercase;text-align:right}
+.intro-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.intro-bottom p{max-width:36ch;color:var(--ink-soft);font-size:15px}
+.scroll-hint{font:500 11px/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.scroll-hint::after{content:"";width:1.5px;height:38px;background:linear-gradient(var(--ink),transparent);animation:hint 1.8s ease-in-out infinite}
+@keyframes hint{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+.reveal{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;padding-block:0 8vh;color:var(--snow);opacity:var(--reveal,0);pointer-events:none}
+.reveal.on{pointer-events:auto}
+.reveal h2{font-size:clamp(44px,8.5vw,140px);max-width:12ch;text-shadow:0 4px 40px rgba(22,48,79,.35)}
+.reveal h2 .flair{font-weight:600;color:var(--beige)}
+.reveal p{max-width:44ch;margin-top:20px;font-size:clamp(16px,1.5vw,19px);opacity:.92}
+.reveal .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.reveal .btn-line{color:var(--snow);box-shadow:inset 0 0 0 1.5px var(--snow)}
+
+/* Бегущая строка */
+.ribbon{background:var(--ice);color:var(--ink);overflow:hidden;border-block:1.5px solid var(--ink);transform:rotate(-2deg) scale(1.04);margin-block:-30px 40px;position:relative;z-index:6}
+.ribbon .track{display:flex;width:max-content;animation:run 32s linear infinite}
+.ribbon span{font:800 clamp(22px,3vw,40px)/1 var(--f-display);text-transform:uppercase;padding:18px 0;white-space:nowrap}
+.ribbon span b{color:var(--snow);-webkit-text-stroke:1.5px var(--ink);font-weight:800;margin-inline:.5em}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* Отсчёт */
+.count-band{padding-block:72px 96px}
+.count-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.count-head h2{font-size:clamp(30px,4.4vw,60px)}
+.count{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cell{background:var(--frost);border-radius:var(--r);padding:22px 20px 18px;position:relative;overflow:hidden;min-width:0}
+.cell::after{content:"";position:absolute;inset:auto -10% -40% auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(#fff,transparent 70%);opacity:.8}
+.cell b{display:block;font:900 clamp(44px,9vw,128px)/.9 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.cell span{font:500 12px/1 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);position:relative;z-index:1}
+.cell.alt{background:var(--beige)}
+
+/* Отель */
+.sec-head{display:grid;gap:18px;margin-bottom:64px;max-width:820px;position:relative}
+.sec-head h2{font-size:clamp(40px,6.4vw,96px)}
+.sec-head p{max-width:58ch;font-size:17px}
+.hotel{background:var(--ink);color:var(--snow);border-radius:48px 48px 0 0;padding-block:110px 140px;overflow:hidden;position:relative}
+.hotel::before{content:"31";position:absolute;right:-2vw;top:-6vw;font:900 42vw/1 var(--f-display);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(169,209,234,.18);pointer-events:none}
+.hotel .eyebrow{color:var(--ice)}
+.hotel .flair{color:var(--beige)}
+.hotel .sec-head p{color:rgba(248,245,239,.72)}
+.frames{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;align-items:center;position:relative}
+.frame{margin:0;background:#fff;color:var(--ink);padding:12px 12px 48px;border-radius:6px;box-shadow:0 24px 50px -24px rgba(0,0,0,.5);position:relative;transition:transform .45s cubic-bezier(.2,.8,.2,1);min-width:0}
+.frame:hover{transform:rotate(0) scale(1.03)!important;z-index:2}
+.frame img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:3px}
+.frame figcaption{position:absolute;left:14px;right:14px;bottom:12px;font:italic 500 20px/1.1 var(--f-flair)}
+.frame:nth-child(1){grid-column:1/span 4;transform:rotate(-4deg)}
+.frame:nth-child(2){grid-column:5/span 4;transform:rotate(2.5deg) translateY(40px)}
+.frame:nth-child(3){grid-column:9/span 4;transform:rotate(-1.5deg)}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:96px;position:relative}
+.facts a,.facts span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid rgba(248,245,239,.3);font-weight:600;font-size:14px;text-decoration:none}
+.facts a:hover{background:rgba(248,245,239,.1)}
+
+/* Цены и контакты */
+.book-band{background:linear-gradient(180deg,var(--ink) 0 80px,var(--snow) 80px);padding-bottom:24px}
+.book{background:var(--beige);border-radius:48px;margin-inline:max(8px,env(safe-area-inset-left,0px));padding-block:96px;position:relative;overflow:hidden}
+.book::after{content:"✳";position:absolute;right:-60px;bottom:-140px;font-size:480px;line-height:1;color:var(--snow);opacity:.5;pointer-events:none;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.book-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start;position:relative;z-index:1}
+.book .sec-head{margin-bottom:0}
+.book .sec-head p{color:var(--ink-soft)}
+.contacts{display:grid;gap:18px;margin-top:36px}
+.contact{display:grid;gap:6px}
+.contact>span{font:500 11px/1 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.contact b{font:700 clamp(20px,2.2vw,28px)/1.2 var(--f-display);letter-spacing:-.01em}
+.contact b a{text-decoration:none}
+.copy-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.copy{font:600 12px/1 var(--f-body);background:var(--snow);border:0;color:var(--ink);border-radius:999px;padding:9px 14px;cursor:pointer;min-height:36px}
+.copy:hover{background:#fff}
+.text-link{font-weight:700;font-size:14px}
+.prices{display:grid;gap:4px;padding:36px;border-radius:32px;background:var(--snow);box-shadow:0 40px 80px -40px rgba(22,48,79,.4)}
+.prices h3{font-size:26px;margin-bottom:14px}
+.prices ul{list-style:none;margin:0;padding:0}
+.prices li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-block:14px;border-top:1px solid var(--line)}
+.prices li:first-child{border-top:0}
+.prices li span{font-weight:600}
+.prices li b{font:800 clamp(20px,2.2vw,26px)/1 var(--f-display);letter-spacing:-.02em;white-space:nowrap}
+.prices .note{font-size:13px;color:var(--ink-soft);margin-block:10px 18px}
+.prices .actions{display:grid;gap:10px}
+
+footer{padding-block:28px 40px;font-size:13px;color:var(--ink-soft)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+/* Появление блоков при прокрутке */
+/* translate, а не transform: не сбивает наклон карточек-фото */
+.rise{opacity:0;translate:0 28px;transition:opacity .9s cubic-bezier(.16,1,.3,1),translate .9s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms),var(--d,0ms),0ms}
+.rise.in{opacity:1;translate:none}
+
+@media (max-width:980px){
+  nav.links{display:none}
+  .book-grid{grid-template-columns:1fr;gap:40px}
+  .frames{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .frame:nth-child(n){grid-column:auto}
+  .frame:nth-child(2){transform:rotate(2.5deg) translateY(24px)}
+  .frame:nth-child(3){grid-column:1/-1;max-width:60%;justify-self:center}
+}
+@media (max-width:600px){
+  .bar .btn{display:none}
+  .intro{padding-top:150px}
+  .count{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prices{padding:24px;border-radius:24px}
+  .hotel{border-radius:32px 32px 0 0;padding-block:80px 100px}
+  .book{border-radius:32px;padding-block:64px}
+  .dates{text-align:left}
+  .frame:nth-child(3){max-width:80%}
+  .facts{margin-top:72px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .stage{height:auto}
+  .sticky{position:relative}
+  .rise{opacity:1;translate:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  {{> src/components/shared/demo-notice.html }}
+  <div class="wrap bar">
+    <div class="pill">
+      <a class="logo" href="#stage">Сибиряковъ<i>✳</i></a>
+      <nav class="links" aria-label="Разделы">
+        <a href="#count">Отсчёт</a>
+        <a href="#hotel">Отель</a>
+        <a href="#book">Цены и контакты</a>
+      </nav>
+    </div>
+    <div class="pill">
+      <button class="icon-btn" id="snowToggle" type="button" aria-pressed="true" title="Выключить снег" aria-label="Выключить снег">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>
+      </button>
+      <a class="btn btn-ink" href="#book">Забронировать</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="stage" id="stage" aria-label="Новый год в «Сибирякове»">
+    <div class="sticky">
+      <div class="media">
+        <div class="aurora"></div>
+        <video id="bg" autoplay muted loop playsinline preload="auto" poster="../assets/winter.jpg" aria-hidden="true">
+          <source src="../assets/hotel.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="veil"></div>
+      <canvas id="snow" aria-hidden="true"></canvas>
+      <div class="knock" id="knock" aria-hidden="true"><span>2027</span></div>
+
+      <div class="intro">
+        <div class="wrap intro-top">
+          <h1>Новый год <span class="flair">в отеле</span> «Сибиряковъ»</h1>
+          <p class="dates">Открытие<br>15.12.2026</p>
+        </div>
+        <div class="wrap intro-bottom">
+          <p>Гранд & Спа отель среди сосен в Выборгском районе: инфинити-бассейн, бани и ресторан «Веранда».</p>
+          <span class="scroll-hint">Листайте</span>
+        </div>
+      </div>
+
+      <div class="reveal" id="reveal">
+        <div class="wrap">
+          <h2>Самая <span class="flair">снежная</span> ночь года</h2>
+          <p>Новогодние даты, наличие номеров и условия праздничного тарифа уточняйте у отеля.</p>
+          <div class="ctas">
+            <a class="btn btn-snow" href="#book">Цены и контакты</a>
+            <a class="btn btn-line" href="#hotel">Посмотреть отель</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="track">
+      <span>Инфинити-бассейн<b>✳</b>Бани и спа<b>✳</b>Ресторан «Веранда»<b>✳</b>Номера и сьюты<b>✳</b>Сосновый лес<b>✳</b></span>
+      <span>Инфинити-бассейн<b>✳</b>Бани и спа<b>✳</b>Ресторан «Веранда»<b>✳</b>Номера и сьюты<b>✳</b>Сосновый лес<b>✳</b></span>
+    </div>
+  </div>
+
+  <section class="count-band" id="count" aria-labelledby="count-title">
+    <div class="wrap">
+      <div class="count-head rise">
+        <h2 id="count-title">До боя курантов</h2>
+        <p class="eyebrow">Отель открывается 15 декабря 2026</p>
+      </div>
+      <div class="count" role="timer" aria-live="off">
+        <div class="cell rise"><b data-k="d">--</b><span>дней</span></div>
+        <div class="cell alt rise"><b data-k="h">--</b><span>часов</span></div>
+        <div class="cell rise"><b data-k="m">--</b><span>минут</span></div>
+        <div class="cell alt rise"><b data-k="s">--</b><span>секунд</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hotel" id="hotel" aria-labelledby="hotel-title">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="eyebrow">Отель</p>
+        <h2 id="hotel-title">Сосны, <span class="flair">тёплая</span> вода и камин</h2>
+        <p>Номера и сьюты, тёплый инфинити-бассейн под открытым небом, бани и современная русская кухня ресторана «Веранда».</p>
+      </div>
+      <div class="frames">
+        <figure class="frame rise"><img src="../assets/winter.jpg" alt="Заснеженный отель «Сибиряковъ» среди сосен" loading="lazy"><figcaption>Зимний «Сибиряковъ»</figcaption></figure>
+        <figure class="frame rise"><img src="../assets/fireplace.jpeg" alt="Сьют с камином" loading="lazy"><figcaption>Сьют с камином</figcaption></figure>
+        <figure class="frame rise"><img src="../assets/restaurant.jpg" alt="Интерьер ресторана «Веранда»" loading="lazy"><figcaption>Ресторан «Веранда»</figcaption></figure>
+      </div>
+      <div class="facts rise">
+        <a href="https://sibiryakov.club/spa-resort" target="_blank" rel="noopener">Спа и бассейн ↗</a>
+        <a href="https://sibiryakov.club/restorants/veranda" target="_blank" rel="noopener">Ресторан «Веранда» ↗</a>
+        <a href="../hotel.html#rooms">Все номера →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="book-band">
+    <section class="book" id="book" aria-labelledby="book-title">
+      <div class="wrap book-grid">
+        <div class="rise">
+          <div class="sec-head">
+            <p class="eyebrow">Бронирование</p>
+            <h2 id="book-title">Встретьте <span class="flair">2027</span> за городом</h2>
+            <p>Позвоните или напишите в отель: там подскажут свободные номера и условия на новогодние даты.</p>
+          </div>
+          <div class="contacts">
+            <div class="contact"><span>Телефон</span><div class="copy-row"><b><a id="phone" href="tel:+78122377010">+7 (812) 237-70-10</a></b><button class="copy" type="button" data-copy="phone">Скопировать</button></div></div>
+            <div class="contact"><span>Telegram</span><b><a href="https://t.me/veresk_park" target="_blank" rel="noopener">Написать в Telegram ↗</a></b></div>
+            <div class="contact"><span>Адрес</span><b>Ленинградская область, п. Ильичёво, аллея Линтульская, 38/14</b><a class="text-link" href="https://yandex.ru/maps/?text=Ильичёво%20Линтульская%2038%2F14" target="_blank" rel="noopener">Открыть карту ↗</a></div>
+          </div>
+        </div>
+        <div class="prices rise">
+          <h3>Ориентир цен</h3>
+          <ul>
+            <li><span>Делюкс</span><b>от 30 000 ₽</b></li>
+            <li><span>Люкс</span><b>от 35 000 ₽</b></li>
+            <li><span>Сьют</span><b>от 42 000 ₽</b></li>
+            <li><span>Сьют с камином</span><b>от 50 000 ₽</b></li>
+          </ul>
+          <p class="note">Цены с сайта отеля. Стоимость и состав новогоднего тарифа уточняются при бронировании.</p>
+          <div class="actions">
+            <a class="btn btn-ink" href="https://sibiryakov.club/booking" target="_blank" rel="noopener">Бронирование на сайте отеля ↗</a>
+            <a class="btn btn-line" href="../hotel.html#rooms">Посмотреть номера</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Демо-концепт новогодней страницы. Не официальный сайт отеля.</span>
+    <a href="https://sibiryakov.club/" target="_blank" rel="noopener">Официальный сайт ↗</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Видео проявляется, когда реально начинает играть
+  var v = document.getElementById('bg');
+  v.addEventListener('playing', function(){ v.classList.add('ready'); });
+
+  // Сцена: влёт в «0» числа 2027, затем видео целиком
+  var stage = document.getElementById('stage'), knock = document.getElementById('knock'), reveal = document.getElementById('reveal'), sticky = stage.querySelector('.sticky');
+  function originX(){
+    var span = knock.firstElementChild, r = span.getBoundingClientRect(), w = knock.offsetWidth || 1;
+    knock.style.setProperty('--ox', ((r.left + r.width * 0.37) / w * 100) + '%');
+  }
+  function onScroll(){
+    if (reduce) return;
+    var total = stage.offsetHeight - sticky.offsetHeight;
+    var p = Math.min(1, Math.max(0, -stage.getBoundingClientRect().top / total));
+    var k = Math.min(1, p / .7), e = k * k * k;
+    knock.style.transform = 'scale(' + (1 + e * 38) + ')';
+    knock.style.opacity = String(1 - Math.max(0, (k - .75) / .25));
+    var rv = Math.max(0, Math.min(1, (p - .62) / .3));
+    sticky.style.setProperty('--p', p); sticky.style.setProperty('--reveal', rv);
+    reveal.classList.toggle('on', rv > .5);
+  }
+  if (reduce) { knock.hidden = true; sticky.style.setProperty('--reveal', 1); sticky.querySelector('.intro').hidden = true; reveal.classList.add('on'); v.removeAttribute('autoplay'); v.pause(); v.classList.add('ready'); }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', function(){ originX(); onScroll(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(originX);
+  originX(); onScroll();
+
+  // Отсчёт до 1 января 2027, местное время
+  var target = new Date(2027,0,1).getTime(), cells = {};
+  document.querySelectorAll('.count b').forEach(function(b){ cells[b.dataset.k] = b; });
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var s = Math.floor(Math.max(0, target - Date.now()) / 1000);
+    cells.d.textContent = Math.floor(s / 86400);
+    cells.h.textContent = pad(Math.floor(s % 86400 / 3600));
+    cells.m.textContent = pad(Math.floor(s % 3600 / 60));
+    cells.s.textContent = pad(s % 60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Снег над сценой; рисуется только пока сцена видна
+  var c = document.getElementById('snow'), ctx = c.getContext('2d'), flakes = [], on = !reduce, raf = 0, visible = true;
+  var btn = document.getElementById('snowToggle');
+  try { if (localStorage.getItem('snow') === 'off') on = false; } catch(e){}
+  function size(){
+    var dpr = Math.min(devicePixelRatio || 1, 2), W = c.offsetWidth, H = c.offsetHeight;
+    c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    flakes = Array.from({length: Math.round(W * H / 6000)}, function(){
+      var z = Math.random();
+      return {x:Math.random()*W, y:Math.random()*H, r:.8 + z*3.2, s:.4 + z*1.4, w:Math.random()*6.28, a:.35 + z*.6};
+    });
+  }
+  function draw(){
+    var W = c.offsetWidth, H = c.offsetHeight; ctx.clearRect(0,0,W,H);
+    for (var i = 0; i < flakes.length; i++){ var f = flakes[i];
+      f.y += f.s; f.w += .012; f.x += Math.sin(f.w) * .5;
+      if (f.y > H + 6){ f.y = -6; f.x = Math.random() * W; }
+      ctx.globalAlpha = f.a; ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill(); }
+    raf = requestAnimationFrame(draw);
+  }
+  function apply(){
+    cancelAnimationFrame(raf); ctx.clearRect(0,0,c.width,c.height);
+    if (on && visible) draw();
+    var l = on ? 'Выключить снег' : 'Включить снег';
+    btn.setAttribute('aria-pressed', on); btn.title = l; btn.setAttribute('aria-label', l);
+  }
+  btn.addEventListener('click', function(){ on = !on; try { localStorage.setItem('snow', on ? 'on' : 'off'); } catch(e){} apply(); });
+  addEventListener('resize', size); size(); apply();
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; apply(); }).observe(stage);
+
+  // Кнопка «Скопировать»
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var el = document.getElementById(b.dataset.copy), txt = el.textContent.trim();
+      function done(){ b.textContent = 'Скопировано'; setTimeout(function(){ b.textContent = 'Скопировать'; }, 1600); }
+      function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
+    });
+  });
+
+  // Появление блоков при прокрутке
+  var items = document.querySelectorAll('.rise');
+  if (reduce || !('IntersectionObserver' in window)) { items.forEach(function(el){ el.classList.add('in'); }); }
+  else {
+    var seen = new Map();
+    items.forEach(function(el){ var n = seen.get(el.parentElement) || 0; seen.set(el.parentElement, n + 1); el.style.setProperty('--d', Math.min(n * 90, 360) + 'ms'); });
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -8% 0px', threshold:.1});
+    items.forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

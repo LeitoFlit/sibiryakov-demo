@@ -20,6 +20,7 @@ async function render(file, ancestors = []) {
   return output + template.slice(cursor);
 }
 for (const page of config.pages) {
+  await mkdir(dirname(resolve(destination, page)), { recursive: true });
   await writeFile(resolve(destination, page), await render('src/pages/' + page));
 }
 for (const style of config.styles) {
@@ -29,4 +30,4 @@ for (const style of config.styles) {
 const scripts = await Promise.all(config.scripts.map(path => readFile(resolve(root, path), 'utf8')));
 await writeFile(resolve(destination, 'app.js'), scripts.join(''));
 await cp(resolve(root, 'public'), destination, { recursive: true });
-console.log('Built dist/: index.html, hotel.html, styles, app.js and all assets.');
+console.log('Built dist/: ' + config.pages.join(', ') + ', styles, app.js and all assets.');
