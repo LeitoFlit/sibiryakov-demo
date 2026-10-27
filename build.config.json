@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "index.html",
+    "hotel.html"
+  ],
+  "styles": [
+    {
+      "source": "src/styles/01-foundation.css",
+      "output": "style.css"
+    },
+    {
+      "source": "src/styles/02-catalogue-layout.css",
+      "output": "ritz.css"
+    },
+    {
+      "source": "src/styles/03-posthotel-theme.css",
+      "output": "posthotel.css"
+    }
+  ],
+  "scripts": [
+    "src/scripts/01-video.js",
+    "src/scripts/02-navigation.js",
+    "src/scripts/03-reservation-modal.js",
+    "src/scripts/04-clock-legacy.js",
+    "src/scripts/05-room-gallery.js",
+    "src/scripts/06-room-details.js",
+    "src/scripts/07-booking.js",
+    "src/scripts/08-spa-tabs.js",
+    "src/scripts/09-hero-stories.js",
+    "src/scripts/10-booking-bar.js"
+  ]
+}

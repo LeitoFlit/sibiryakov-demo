@@ -1,0 +1,1 @@
+const reservation=document.querySelector('#reservation');document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();if(menu.open)menu.close();reservation.showModal()}));document.querySelector('.reservation-close').onclick=()=>reservation.close();

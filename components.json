@@ -1,0 +1,114 @@
+[
+  {
+    "page": "index.html",
+    "component": "src/components/shared/demo-notice.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/header.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/site-menu.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/hero.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/winter-intro.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/wellness.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/restaurant.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/rooms-feature.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/new-year.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/home/faq.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/footer.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/booking-bar.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/reservation.html"
+  },
+  {
+    "page": "index.html",
+    "component": "src/components/shared/detail-dialog.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/demo-notice.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/header.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/site-menu.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/gallery.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/welcome.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/rooms.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/spa.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/experiences.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/holiday.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/hotel/faq.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/footer.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/booking-bar.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/reservation.html"
+  },
+  {
+    "page": "hotel.html",
+    "component": "src/components/shared/detail-dialog.html"
+  }
+]

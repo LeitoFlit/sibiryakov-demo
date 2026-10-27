@@ -1,0 +1,4 @@
+const quickArrival=document.querySelector('#quick-arrival'),quickDeparture=document.querySelector('#quick-departure');
+quickArrival.addEventListener('change',()=>{if(!quickArrival.value)return;quickDeparture.min=nextDay(quickArrival.value);if(quickDeparture.value<=quickArrival.value)quickDeparture.value=quickDeparture.min});
+document.querySelector('.stay-bar').addEventListener('submit',e=>{e.preventDefault();arrival.value=quickArrival.value;departure.value=quickDeparture.value;document.querySelector('#guests').value=document.querySelector('#quick-guests').value;reservation.showModal()});
+[arrival,departure,document.querySelector('#guests')].forEach(field=>field.addEventListener('change',()=>{quickArrival.value=arrival.value;quickDeparture.value=departure.value;document.querySelector('#quick-guests').value=document.querySelector('#guests').value}));
